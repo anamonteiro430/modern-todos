@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import { reducer, initialState } from './../Reducer';
 import { Todo } from './Todo';
 import { Todos_Info } from './Todos_Info';
@@ -7,7 +7,7 @@ import arrow from './../Images/arrow.png';
 export const Main = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [todoText, setTodoText] = useState('');
-
+  console.log('state in main', state);
   const handleChange = (e) => {
     setTodoText(e.target.value);
   };
@@ -33,10 +33,19 @@ export const Main = () => {
       </div>
 
       {state.todos ? (
-        state.todos.map((todo) => <Todo todo={todo} />)
+        state.todos.map((todo) => (
+          <Todo
+            id={todo.id}
+            text={todo.text}
+            isCompleted={todo.isCompleted}
+            dispatch={dispatch}
+          />
+        ))
       ) : (
         <p>You're done!</p>
       )}
+
+      <Todos_Info state={state} />
     </div>
   );
 };

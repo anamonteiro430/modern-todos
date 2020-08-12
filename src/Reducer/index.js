@@ -24,6 +24,21 @@ export function reducer(state, action) {
         ],
       };
 
+    case 'markAsComplete':
+      console.log('id, ', action.payload);
+      console.log('state in, ', action.payload);
+      let updateTodo = state.todos.map((todo) =>
+        todo.id == action.payload
+          ? { ...todo, isCompleted: !todo.isCompleted }
+          : todo
+      );
+
+      console.log('in reducer, ', updateTodo);
+      return {
+        ...state,
+        todos: updateTodo,
+      };
+
     default:
       return state;
   }
