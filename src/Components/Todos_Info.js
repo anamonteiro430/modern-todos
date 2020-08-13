@@ -1,8 +1,6 @@
-import React, { useReducer, useState, useEffect } from 'react';
-import { reducer, initialState } from './../Reducer';
+import React from 'react';
 
 export const Todos_Info = ({ state, dispatch }) => {
-  console.log('inside todos info', state);
   return (
     <div className="todos-info">
       <p>
