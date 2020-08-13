@@ -1,12 +1,24 @@
 import React, { useReducer, useState, useEffect } from 'react';
-import { reducer, initialState } from './../Reducer';
+import { todoApp, initialState } from './../Reducer';
+import createPersistedReducer from 'use-persisted-reducer';
+
 import { Todo } from './Todo';
 import { Todos_Info } from './Todos_Info';
 import arrow from './../Images/arrow.png';
 
 export const Main = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const usePersistedReducer = createPersistedReducer('todos');
+  const [state, dispatch] = usePersistedReducer(todoApp, initialState);
+
   const [todoText, setTodoText] = useState('');
+  const myTodos = state.todosList.filter((todos) =>
+    state.visibilityFilter === 'SHOW_COMPLETED'
+      ? todos.isCompleted
+      : state.visibilityFilter === 'SHOW_ACTIVE'
+      ? !todos.isCompleted
+      : todos
+  );
+  console.log('MYTODOS', myTodos);
   console.log('state in main', state);
   const handleChange = (e) => {
     setTodoText(e.target.value);
@@ -32,8 +44,8 @@ export const Main = () => {
         </form>
       </div>
 
-      {state.todos ? (
-        state.todos.map((todo) => (
+      {myTodos ? (
+        myTodos.map((todo) => (
           <Todo
             id={todo.id}
             text={todo.text}
@@ -45,7 +57,7 @@ export const Main = () => {
         <p>You're done!</p>
       )}
 
-      <Todos_Info state={state} />
+      <Todos_Info state={state} dispatch={dispatch} />
     </div>
   );
 };

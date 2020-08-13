@@ -3,6 +3,7 @@ import checkmark from './../Images/checkmark.svg';
 import emptyCheckmark from './../Images/empty_checkmark.svg';
 
 export const Todo = ({ id, text, isCompleted, dispatch }) => {
+  console.log('IN TODOJS');
   return (
     <div className="todo">
       {isCompleted ? (
