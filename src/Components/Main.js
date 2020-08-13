@@ -1,7 +1,6 @@
 import React, { useReducer, useState, useEffect } from 'react';
 import { todoApp, initialState } from './../Reducer';
 import createPersistedReducer from 'use-persisted-reducer';
-
 import { Todo } from './Todo';
 import { Todos_Info } from './Todos_Info';
 import arrow from './../Images/arrow.png';
@@ -18,11 +17,6 @@ export const Main = () => {
       ? !todos.isCompleted
       : todos
   );
-  console.log('MYTODOS', myTodos);
-  console.log('state in main', state);
-  const handleChange = (e) => {
-    setTodoText(e.target.value);
-  };
 
   const submitting = (e) => {
     e.preventDefault();
@@ -39,7 +33,8 @@ export const Main = () => {
             name="text"
             value={todoText}
             type="text"
-            onChange={handleChange}
+            placeholder="What needs to be done?"
+            onChange={(e) => setTodoText(e.target.value)}
           />
         </form>
       </div>

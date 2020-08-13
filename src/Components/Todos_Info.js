@@ -9,30 +9,55 @@ export const Todos_Info = ({ state, dispatch }) => {
         {state.todosList.filter((m) => m.isCompleted === false).length} items
         left
       </p>
-      <button
-        onClick={() =>
-          dispatch({ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ALL' })
-        }
-        className="all"
-      >
-        All
-      </button>
-      <button
-        onClick={() =>
-          dispatch({ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ACTIVE' })
-        }
-        className="active"
-      >
-        Active
-      </button>
-      <button
-        onClick={() =>
-          dispatch({ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_COMPLETED' })
-        }
-        className="completed"
-      >
-        Completed
-      </button>
+      <div className="button-wrapper">
+        <button
+          onClick={() =>
+            dispatch({ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ALL' })
+          }
+          style={
+            state.visibilityFilter === 'SHOW_ALL'
+              ? { border: '1px solid #253237' }
+              : null
+          }
+        >
+          All
+        </button>
+        <button
+          onClick={() =>
+            dispatch({ type: 'SET_VISIBILITY_FILTER', filter: 'SHOW_ACTIVE' })
+          }
+          style={
+            state.visibilityFilter === 'SHOW_ACTIVE'
+              ? { border: '1px solid #253237' }
+              : null
+          }
+        >
+          Active
+        </button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: 'SET_VISIBILITY_FILTER',
+              filter: 'SHOW_COMPLETED',
+            })
+          }
+          style={
+            state.visibilityFilter === 'SHOW_COMPLETED'
+              ? { border: '1px solid #253237' }
+              : null
+          }
+        >
+          Completed
+        </button>
+      </div>
+      <div className="deleteTodosWrapper">
+        <button
+          className="deleteTodos"
+          onClick={() => dispatch({ type: 'DELETE_COMPLETED' })}
+        >
+          Delete completed
+        </button>
+      </div>
     </div>
   );
 };

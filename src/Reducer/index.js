@@ -54,6 +54,12 @@ export function todosReducer(state, action) {
       console.log('in reducer, ', updateTodo);
       return updateTodo;
 
+    case 'DELETE_COMPLETED':
+      console.log('deleteTodos todo in reducer');
+      const onlyActive = state.filter((todo) => !todo.isCompleted);
+      console.log('only active', onlyActive);
+      return onlyActive;
+
     case 'FILTER_ALL':
       console.log('STATE IN FIRLTERALL', state);
       return state;

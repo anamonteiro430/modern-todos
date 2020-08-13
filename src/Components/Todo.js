@@ -5,9 +5,9 @@ import emptyCheckmark from './../Images/empty_checkmark.svg';
 export const Todo = ({ id, text, isCompleted, dispatch }) => {
   console.log('IN TODOJS');
   return (
-    <div className="todo">
+    <div>
       {isCompleted ? (
-        <>
+        <div className="todo">
           <div
             className="completeBtn "
             onClick={() => dispatch({ type: 'markAsComplete', payload: id })}
@@ -15,9 +15,9 @@ export const Todo = ({ id, text, isCompleted, dispatch }) => {
             <img src={checkmark} alt="marked as complete" />
           </div>
           <p className="completed">{text}</p>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="todo">
           <div
             className="completeBtn"
             onClick={() => dispatch({ type: 'markAsComplete', payload: id })}
@@ -25,7 +25,7 @@ export const Todo = ({ id, text, isCompleted, dispatch }) => {
             <img src={emptyCheckmark} alt="to mark as complete" />
           </div>
           <p>{text}</p>
-        </>
+        </div>
       )}
     </div>
   );
